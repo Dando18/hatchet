@@ -429,6 +429,16 @@ class GraphFrame:
         HDF5Writer(filename).write(self, key=key, **kwargs)
 
     @Logger.loggable
+    def to_pyg(self, filename, encoder=None, **kwargs):
+        # create PyTorch Geometric graph from GraphFrame
+        # returns a torch_geometric.data.Data graph object
+
+        # import this lazily to avoid circular dependencies
+        from .writers.pyg_writer import PyGWriter
+
+        return PyGWriter(filename).write(self, encoder=encoder, **kwargs)
+
+    @Logger.loggable
     def update_metadata(self, num_processes=None, num_threads=None, metadata=None):
         """Update a GraphFrame object's metadata."""
         if num_processes is not None:
