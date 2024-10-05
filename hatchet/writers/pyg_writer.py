@@ -13,8 +13,8 @@ class PyGWriter:
         encoding.
     """
 
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self):
+        pass
 
     def _build_node_representation(self, node, metric_columns, dataframe, encoder):
         embedding = dataframe.loc[node, metric_columns].values.tolist()
