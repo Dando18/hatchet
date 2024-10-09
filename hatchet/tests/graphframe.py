@@ -1340,7 +1340,9 @@ def test_update_metadata(mock_graph_literal):
 
 def test_to_pyg(mock_graph_literal):
     try:
+        # noqa: F401
         import torch
+        # noqa: F401
         import torch_geometric
     except ImportError:
         pytest.skip("PyTorch and/or PyTorch Geometric are not installed.")
