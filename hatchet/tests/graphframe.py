@@ -1342,6 +1342,7 @@ def test_to_pyg(mock_graph_literal):
     try:
         # noqa: F401
         import torch
+
         # noqa: F401
         import torch_geometric
     except ImportError:
