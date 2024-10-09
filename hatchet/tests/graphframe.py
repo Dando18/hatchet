@@ -1352,22 +1352,37 @@ def test_to_pyg(mock_graph_literal):
     # a simple PyG graph with 2 features per node: time and time (inc)
     pyg = gf.to_pyg()
     assert isinstance(pyg, torch_geometric.data.Data), "Graph is not a PyG Data object."
-    assert pyg.x.shape[0] == num_nodes, "Number of nodes in PyG Data object does not match."
-    assert pyg.x.shape[1] == 2, "Default number of features in PyG Data object is not 2."
-    assert pyg.edge_index.shape[1] == num_edges, "Number of edges in PyG Data object does not match."
-    
+    assert (
+        pyg.x.shape[0] == num_nodes
+    ), "Number of nodes in PyG Data object does not match."
+    assert (
+        pyg.x.shape[1] == 2
+    ), "Default number of features in PyG Data object is not 2."
+    assert (
+        pyg.edge_index.shape[1] == num_edges
+    ), "Number of edges in PyG Data object does not match."
+
     # a simpler PyG graph with 1 feature per node: time (inc)
     pyg = gf.to_pyg(metrics=["time (inc)"])
     assert isinstance(pyg, torch_geometric.data.Data), "Graph is not a PyG Data object."
-    assert pyg.x.shape[0] == num_nodes, "Number of nodes in PyG Data object does not match."
+    assert (
+        pyg.x.shape[0] == num_nodes
+    ), "Number of nodes in PyG Data object does not match."
     assert pyg.x.shape[1] == 1, "Number of features in PyG Data object is not 1."
-    assert pyg.edge_index.shape[1] == num_edges, "Number of edges in PyG Data object does not match."
+    assert (
+        pyg.edge_index.shape[1] == num_edges
+    ), "Number of edges in PyG Data object does not match."
 
     # a PyG graph with an encoder
-    def name_encoder(name): # constant scheme for test
+    def name_encoder(name):  # constant scheme for test
         return [0, 1, 2, 3]
+
     pyg = gf.to_pyg(encoder=name_encoder)
     assert isinstance(pyg, torch_geometric.data.Data), "Graph is not a PyG Data object."
-    assert pyg.x.shape[0] == num_nodes, "Number of nodes in PyG Data object does not match."
-    assert pyg.x.shape[1] == 2+4, "Number of features in PyG Data object is not 6."
-    assert pyg.edge_index.shape[1] == num_edges, "Number of edges in PyG Data object does not match."
+    assert (
+        pyg.x.shape[0] == num_nodes
+    ), "Number of nodes in PyG Data object does not match."
+    assert pyg.x.shape[1] == 2 + 4, "Number of features in PyG Data object is not 6."
+    assert (
+        pyg.edge_index.shape[1] == num_edges
+    ), "Number of edges in PyG Data object does not match."
